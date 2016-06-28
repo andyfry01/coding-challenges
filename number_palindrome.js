@@ -18,3 +18,9 @@ function reverseNum (number) {
   }
   console.log(reversed);
 }
+
+
+
+var number = 12345
+var left = undefined;
+var reverse = 0;
