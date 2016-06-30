@@ -1,36 +1,35 @@
 // Implement an algorithm to find the nth to last element of a singly linked list.
 
-  function Node(data) {
-    this.data = data,
-    this.next = undefined
-  };
+function Node(data) {
+  this.data = data,
+  this.next = undefined
+};
 
-  function SinglyList() {
-    this.length = 0;
-    this.head = null;
-  }
+function SinglyList() {
+  this.length = 0;
+  this.head = null;
+}
 
-  SinglyList.prototype.add = function(value) {
-    var node = new Node(value),
-    currentNode = this.head;
+SinglyList.prototype.add = function(value) {
+  var node = new Node(value),
+  currentNode = this.head;
 
-    //adds node to head of list if the list is empty
-    if (!currentNode) {
-      this.head = node;
-      this.length += 1;
-
-      console.log(node);
-    }
-
-    //adds node to end of list if the list is not empty
-    while (currentNode.next) {
-      currentNode = currentNode.next;
-    }
-
-    currentNode.next = node;
-    this.length += 1
+  //adds node to head of list if the list is empty
+  if (!currentNode) {
+    this.head = node;
+    this.length += 1;
     console.log(node);
   }
+
+  //adds node to end of list if the list is not empty
+  while (currentNode.next) {
+    currentNode = currentNode.next;
+  }
+
+  currentNode.next = node;
+  this.length += 1
+  console.log(node);
+}
 
 
 function nodeFinder(list, n) {
@@ -50,10 +49,8 @@ function nodeFinder(list, n) {
   if (numSteps == 0) {
     return console.log("The path to the node " + n + " step(s) from the end of the list is:", list.head);
   } else if (numSteps > 0) {
-
     stepFinder(numSteps)
     return console.log("The path to the node " + n + " step(s) from the end of the list is:", starter += steps)
-
   }
 }
 
