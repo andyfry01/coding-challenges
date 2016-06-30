@@ -3,9 +3,6 @@
 
 // Version two: cleaner, more efficient code. Object oriented.
 
-var cash = 35.16,
-    coinVals = [50, 25, 10, 5, 1];
-
 var coinCounter = {
 
   numPennies: undefined,
@@ -63,3 +60,11 @@ var testSuite = {
     return false;
   }
 }
+
+// Sample functions and variables to run all the methods from the coinCounter object
+var cash = 35.16,
+    coinVals = [50, 25, 10, 5, 1];
+
+coinCounter.cashConverter(cash)
+coinCounter.coinTotalBuilder(coinVals)
+coinCounter.makeChange(coinCounter.numPennies, coinVals)
