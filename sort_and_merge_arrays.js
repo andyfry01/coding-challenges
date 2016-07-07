@@ -15,12 +15,33 @@
 
 const UNSORTED_ARRAY = [[1,3],[4,6],[5,8],[13,17],[11,14]]
 
-const ARRAY_SORTER = {
-  sortedArray: [],
-  sortSubArrays: function(array) {
 
+let testArray = [[4,6],[1,3]]
+let sortedArray = []
+
+const ARRAY_SORTER = {
+
+  // Brute force O(n^2) sorting method, can be refactored
+  sortSubArrays: function(array, sortedArray) {
+    for (var i = 0; i < array.length; i++) {
+      // for (var j = 0; j < sortedArray.length; j++) {
+        console.log("sortedArray.length", sortedArray.length);
+        // if (sortedArray.length < 1) {
+        //   console.log("sorted array len < 1", array[i]);
+        //   sortedArray.push(array[i])
+        // }
+        // if (sortedArray.length == 1) {
+        //   if (subArray[i][0] < array[j][0]) {
+        //     sortedArray.push(array[i])
+        //   } else {
+        //     sortedArray.unshift(array[i])
+        //   }
+        // }
+      // }
+    }
+    console.log(sortedArray);
   },
-  mergeArrays:function(){
+  mergeSubArrays:function(){
 
   }
 }
