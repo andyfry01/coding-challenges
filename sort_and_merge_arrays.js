@@ -53,8 +53,13 @@ const ARRAY_SORTER = {
   mergeSubArrays: function(sortedArray, mergeIndices) {
     const ARRAY_LEN = mergeIndices.length
     for (let i = 0; i < ARRAY_LEN; i++) {
-
+      let subArrayOne = sortedArray[mergeIndices[i].indexOne]
+      let subArrayTwo = sortedArray[mergeIndices[i].indexTwo]
+      let arrayMerge = []
+      arrayMerge.push(subArrayOne[0], subArrayTwo[1])
+      this.mergedArrays.push(arrayMerge)
     }
+    console.log(this.mergedArrays)
   }
 
 }
