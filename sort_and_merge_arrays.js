@@ -15,11 +15,11 @@
 
 const UNSORTED_ARRAY = [[1,3],[4,6],[5,8],[13,17],[11,14]]
 
-
-let testArray = [[4,6],[1,3],[2,3],[10,12]]
-let sortedArray = []
-
 const ARRAY_SORTER = {
+
+  sortedArray: undefined,
+  mergeIndices: [],
+  mergedArrays: [],
 
   // Bubble sort method to get sub arrays in correct order
   sortSubArrays: function(array) {
@@ -33,9 +33,28 @@ const ARRAY_SORTER = {
         }
       }
     }
-    console.log(array);
+    this.sortedArray = array
+    console.log("sorted array is", this.sortedArray);
   },
-  mergeSubArrays:function(){
 
+  // locates indices in sorted array to merge, which is used in turn by mergeSubArrays
+  findArraysToMerge: function(sortedArray) {
+    const ARRAY_LEN = sortedArray.length - 1
+    for (let i = 0; i < ARRAY_LEN; i++) {
+      if (sortedArray[i][1] > sortedArray[i+1][0]) {
+        console.log(sortedArray[i], sortedArray[i+1]);
+        console.log("array", i, "and array", i+1, "need to be combined");
+        this.mergeIndices.push({indexOne: i, indexTwo: i+1})
+      }
+    }
+    console.log(this.mergeIndices);
+  },
+
+  mergeSubArrays: function(sortedArray, mergeIndices) {
+    const ARRAY_LEN = mergeIndices.length
+    for (let i = 0; i < ARRAY_LEN; i++) {
+
+    }
   }
+
 }
