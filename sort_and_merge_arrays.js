@@ -16,30 +16,24 @@
 const UNSORTED_ARRAY = [[1,3],[4,6],[5,8],[13,17],[11,14]]
 
 
-let testArray = [[4,6],[1,3]]
+let testArray = [[4,6],[1,3],[2,3],[10,12]]
 let sortedArray = []
 
 const ARRAY_SORTER = {
 
-  // Brute force O(n^2) sorting method, can be refactored
-  sortSubArrays: function(array, sortedArray) {
-    for (var i = 0; i < array.length; i++) {
-      // for (var j = 0; j < sortedArray.length; j++) {
-        console.log("sortedArray.length", sortedArray.length);
-        // if (sortedArray.length < 1) {
-        //   console.log("sorted array len < 1", array[i]);
-        //   sortedArray.push(array[i])
-        // }
-        // if (sortedArray.length == 1) {
-        //   if (subArray[i][0] < array[j][0]) {
-        //     sortedArray.push(array[i])
-        //   } else {
-        //     sortedArray.unshift(array[i])
-        //   }
-        // }
-      // }
+  // Bubble sort method to get sub arrays in correct order
+  sortSubArrays: function(array) {
+    const ARRAY_LEN = array.length
+    for (let i = ARRAY_LEN - 1; i >= 0; i--) {
+      for (let j = 1; j <= i; j++) {
+        if (array[j-1][0] > array[j][0]) {
+          let temp = array[j-1]
+          array[j-1] = array[j]
+          array[j] = temp
+        }
+      }
     }
-    console.log(sortedArray);
+    console.log(array);
   },
   mergeSubArrays:function(){
 
