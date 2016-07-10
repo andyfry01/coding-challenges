@@ -5,13 +5,12 @@
 // becomes:
 // [[1,3],[4,8],[11,17]]
 
-// All sub-arrays will already be sorted (i.e. [1,4] instead of [4,1])
+// All sub-arrays will already be sorted from lowest to highest value (i.e. [1,4] instead of [4,1])
 
-// 1. Step one: sort arrays within the array according to the first number, highest
-// to lowest
+// Notes:
+// Can currently sort arrays successfully if there are only two subarrays in any given array that overlap
+// Would be good to refactor for cases where there are more than two sets of overlapping subarrays
 
-// 2. If array[i][1] is <= array[i+1][0], push into new array
-// 3. Otherwise, push array[i] into new array and move on to the next
 
 const UNSORTED_ARRAY = [[1,3],[4,6],[5,8],[13,17],[11,14]]
 
@@ -50,16 +49,28 @@ const ARRAY_SORTER = {
     console.log(this.mergeIndices);
   },
 
-  mergeSubArrays: function(sortedArray, mergeIndices) {
-    const ARRAY_LEN = mergeIndices.length
+  // merges this.sortedArray according to this.mergeIndices and pushes results into this.mergedArrays
+  mergeSubArrays: function(sortedArray, arraysToMerge) {
+
+    const ARRAY_LEN = sortedArray.length
+    console.log(sortedArray);
+
     for (let i = 0; i < ARRAY_LEN; i++) {
-      let subArrayOne = sortedArray[mergeIndices[i].indexOne]
-      let subArrayTwo = sortedArray[mergeIndices[i].indexTwo]
-      let arrayMerge = []
-      arrayMerge.push(subArrayOne[0], subArrayTwo[1])
-      this.mergedArrays.push(arrayMerge)
+      // checks to see if iterator matches any of the merge indices
+      if (i == arraysToMerge[0].indexOne || i == arraysToMerge[0].indexTwo) {
+        //builds a new array based on the merge indices if there is a match, [1,3] and [2,4] become [1,4]
+        let arrayMerge = new Array(sortedArray[arraysToMerge[0].indexOne][0], sortedArray[arraysToMerge[0].indexTwo][1])
+        this.mergedArrays.push(arrayMerge)
+        arraysToMerge.shift(arraysToMerge[0])
+        // in order to avoid adding duplicates of already merged subarrays I increase the iterator by two here, which means
+        // that multiple passes of the function would be required to successfully merge three or more overlapping subarrays
+        i += 2
+      } else {
+        this.mergedArrays.push(sortedArray[i])
+      }
+
     }
-    console.log(this.mergedArrays)
+    return this.mergedArrays
   }
 
 }
