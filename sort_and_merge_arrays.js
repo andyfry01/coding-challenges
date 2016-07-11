@@ -11,8 +11,14 @@
 // Can currently sort arrays successfully if there are only two subarrays in any given array that overlap
 // Would be good to refactor for cases where there are more than two sets of overlapping subarrays
 
-let unsortedArray = [];
+const VARIABLES = {
+ unsortedArray: [],
+ sortedArray: undefined,
+ mergeIndices: [],
+ mergedArrays: [],
+}
 
+// Array generator method to come up with x number of unsorted arrays. Default max value of 10 for each array index
 const ARRAY_GENERATOR = {
 
   makeArray: function(numSubArrays, maxValue = 10){
@@ -21,20 +27,30 @@ const ARRAY_GENERATOR = {
       let firstIndex = Math.floor(Math.random() * maxValue + 1)
       let secondIndex = Math.floor(Math.random() * maxValue + 1)
       let subArray = new Array(firstIndex, secondIndex)
-      unsortedArray.push(subArray)
+      VARIABLES.unsortedArray.push(subArray)
     }
-    console.log(unsortedArray);
+    console.table(VARIABLES.unsortedArray);
   }
-  
+
 }
 
 const ARRAY_SORTER = {
 
-  sortedArray: undefined,
-  mergeIndices: [],
-  mergedArrays: [],
+  // Checks all subarrays and orders each index from lowest highest ([3,1] becomes [1,3])
+  orderSubArrayIndices: function(array) {
+    const ARRAY_LEN = array.length
+    for (let i = 0; i < ARRAY_LEN; i++) {
+      if (array[i][0] > array[i][1]) {
+        let temp = undefined
+        temp = array[i][0]
+        array[i][0] = array[i][1]
+        array[i][1] = temp
+      }
+    }
+    console.table(array);
+  },
 
-  // Bubble sort method to get sub arrays in correct order
+  // Bubble sort method to get sub arrays in ascending order according to first index ([1,3],[4,6],[2,5] becomes [1,3], [2,5], [4,6])
   sortSubArrays: function(array) {
     const ARRAY_LEN = array.length
     for (let i = ARRAY_LEN - 1; i >= 0; i--) {
@@ -46,8 +62,8 @@ const ARRAY_SORTER = {
         }
       }
     }
-    this.sortedArray = array
-    console.log("sorted array is", this.sortedArray);
+    VARIABLES.sortedArray = array
+    console.log("sorted array is", VARIABLES.sortedArray);
   },
 
   // locates indices in sorted array to merge, which is used in turn by mergeSubArrays
@@ -57,13 +73,13 @@ const ARRAY_SORTER = {
       if (sortedArray[i][1] > sortedArray[i+1][0]) {
         console.log(sortedArray[i], sortedArray[i+1]);
         console.log("array", i, "and array", i+1, "need to be combined");
-        this.mergeIndices.push({indexOne: i, indexTwo: i+1})
+        VARIABLES.mergeIndices.push({indexOne: i, indexTwo: i+1})
       }
     }
-    console.log(this.mergeIndices);
+    console.log(VARIABLES.mergeIndices);
   },
 
-  // merges this.sortedArray according to this.mergeIndices and pushes results into this.mergedArrays
+  // merges VARIABLES.sortedArray according to VARIABLES.mergeIndices and pushes results into VARIABLES.mergedArrays
   mergeSubArrays: function(sortedArray, arraysToMerge) {
 
     const ARRAY_LEN = sortedArray.length
@@ -74,17 +90,17 @@ const ARRAY_SORTER = {
       if (i == arraysToMerge[0].indexOne || i == arraysToMerge[0].indexTwo) {
         //builds a new array based on the merge indices if there is a match, [1,3] and [2,4] become [1,4]
         let arrayMerge = new Array(sortedArray[arraysToMerge[0].indexOne][0], sortedArray[arraysToMerge[0].indexTwo][1])
-        this.mergedArrays.push(arrayMerge)
+        VARIABLES.mergedArrays.push(arrayMerge)
         arraysToMerge.shift(arraysToMerge[0])
         // in order to avoid adding duplicates of already merged subarrays I increase the iterator by two here, which means
         // that multiple passes of the function would be required to successfully merge three or more overlapping subarrays
         i += 2
       } else {
-        this.mergedArrays.push(sortedArray[i])
+        VARIABLES.mergedArrays.push(sortedArray[i])
       }
 
     }
-    return this.mergedArrays
+    return VARIABLES.mergedArrays
   }
 
 }
