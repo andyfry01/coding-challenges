@@ -11,7 +11,7 @@
 -  **number_palindrome.js**:  Figure out if a given number is a palindrome. You may not convert the number into a string. **(incomplete)**
 - **replace_spaces.js**: Write a method to replace all spaces in a string with ‘%20’
 - **singly_linked.js**: Implement an algorithm to find the nth to last element of a singly linked list.
-- **sort_anagram.jss**: **(incomplete)**
+- **sort_anagram.js**: Write a method to sort an array of strings so that all the anagrams are next to each other. **(incomplete)**
 - **sort_and_merge_arrays.js**: Combine sets of nested arrays with overlapping values. For example: [[1,3],[4,6],[5,8],[13,17],[11,14]] becomes: [[1,3],[4,8],[11,17]] **(incomplete)**
 - **substrings.js**: Assume you have a method isSubstring which checks if one word is a substring of another. Given two strings, s1 and s2, write code to check if s2 is a rotation of s1 using only one call to isSubstring (i e , “waterbottle” is a rotation of “erbottlewat”)
 
