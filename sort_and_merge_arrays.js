@@ -55,7 +55,15 @@ const ARRAY_SORTER = {
     const ARRAY_LEN = array.length
     for (let i = ARRAY_LEN - 1; i >= 0; i--) {
       for (let j = 1; j <= i; j++) {
+        if (array[j-1][0] === array[j][0]) {
+          if (array[j-1][1] > array[j][1]) {
+            let temp = array[j]
+            array[j] = array[j-1]
+            array[j-1] = temp
+          }
+        }
         if (array[j-1][0] > array[j][0]) {
+          console.log("found an array");
           let temp = array[j-1]
           array[j-1] = array[j]
           array[j] = temp
