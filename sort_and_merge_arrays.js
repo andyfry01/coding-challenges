@@ -5,8 +5,6 @@
 // becomes:
 // [[1,3],[4,8],[11,17]]
 
-// All sub-arrays will already be sorted from lowest to highest value (i.e. [1,4] instead of [4,1])
-
 // Notes:
 // Can currently sort arrays successfully if there are only two subarrays in any given array that overlap
 // Would be good to refactor for cases where there are more than two sets of overlapping subarrays
@@ -18,12 +16,11 @@ const VARIABLES = {
  mergedArrays: [],
 }
 
-// Array generator method to come up with x number of unsorted arrays. Default max value of 10 for each array index
+// Array generator method to come up with x number of unsorted subarrays. Default max value of 10 for each subarray index
 const ARRAY_GENERATOR = {
 
-  makeArray: function(numSubArrays, maxValue = 10){
-    let numArrays = Math.floor(Math.random() * numSubArrays + 2)
-    for (let i = 0; i < numArrays; i++) {
+  makeArray: function(numSubArrays, maxValue = 50){
+    for (let i = 0; i < numSubArrays; i++) {
       let firstIndex = Math.floor(Math.random() * maxValue + 1)
       let secondIndex = Math.floor(Math.random() * maxValue + 1)
       let subArray = new Array(firstIndex, secondIndex)
@@ -50,7 +47,7 @@ const ARRAY_SORTER = {
     console.table(array);
   },
 
-  // Bubble sort method to get sub arrays in ascending order according to first index ([1,3],[4,6],[2,5] becomes [1,3], [2,5], [4,6])
+  // Bubble sort method to get sub arrays in ascending order according to first/second index ([2,6], [2,5], [1,3] becomes [1,3], [2,5], [2,6])
   sortSubArrays: function(array) {
     const ARRAY_LEN = array.length
     for (let i = ARRAY_LEN - 1; i >= 0; i--) {
@@ -63,7 +60,6 @@ const ARRAY_SORTER = {
           }
         }
         if (array[j-1][0] > array[j][0]) {
-          console.log("found an array");
           let temp = array[j-1]
           array[j-1] = array[j]
           array[j] = temp
@@ -75,16 +71,28 @@ const ARRAY_SORTER = {
   },
 
   // locates indices in sorted array to merge, which is used in turn by mergeSubArrays
-  findArraysToMerge: function(sortedArray) {
+  findArraysToMerge = function(sortedArray) {
     const ARRAY_LEN = sortedArray.length - 1
     for (let i = 0; i < ARRAY_LEN; i++) {
-      if (sortedArray[i][1] > sortedArray[i+1][0]) {
-        console.log(sortedArray[i], sortedArray[i+1]);
-        console.log("array", i, "and array", i+1, "need to be combined");
-        VARIABLES.mergeIndices.push({indexOne: i, indexTwo: i+1})
+      let mergeObject = {
+        start: i,
+        end: undefined,
+        firstIndex: sortedArray[i],
+        lastIndex: undefined
+      }
+      for (let j = i+1; j < ARRAY_LEN; j++) {
+        if (sortedArray[i][1] > sortedArray[j][0]) {
+          console.log(sortedArray[i][1], sortedArray);
+          mergeObject.end = j
+        }
+        if (sortedArray[j][1] < sortedArray[j][0]) {
+          mergeObject.lastIndex = sortedArray[j][1]
+          VARIABLEs.mergeIndices.push(mergeObject)
+          i = j + 1
+        }
       }
     }
-    console.log(VARIABLES.mergeIndices);
+    // console.log(VARIABLES.mergeIndices);
   },
 
   // merges VARIABLES.sortedArray according to VARIABLES.mergeIndices and pushes results into VARIABLES.mergedArrays
