@@ -11,8 +11,22 @@
 // Can currently sort arrays successfully if there are only two subarrays in any given array that overlap
 // Would be good to refactor for cases where there are more than two sets of overlapping subarrays
 
+let unsortedArray = [];
 
-const UNSORTED_ARRAY = [[1,3],[4,6],[5,8],[13,17],[11,14]]
+const ARRAY_GENERATOR = {
+
+  makeArray: function(numSubArrays, maxValue = 10){
+    let numArrays = Math.floor(Math.random() * numSubArrays + 2)
+    for (let i = 0; i < numArrays; i++) {
+      let firstIndex = Math.floor(Math.random() * maxValue + 1)
+      let secondIndex = Math.floor(Math.random() * maxValue + 1)
+      let subArray = new Array(firstIndex, secondIndex)
+      unsortedArray.push(subArray)
+    }
+    console.log(unsortedArray);
+  }
+  
+}
 
 const ARRAY_SORTER = {
 
