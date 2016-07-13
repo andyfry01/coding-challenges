@@ -1,6 +1,7 @@
 # Coding challenges
 
 ## Some daily coding challenges to practice new skills/keep sharp
+Some of these just fulfill the stipulations of the challenge and stop there, others I've expanded into mini-projects with functions for generating input data, testing, etc.  
 
 ### List of challenges completed with short description:
 

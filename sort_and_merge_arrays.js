@@ -13,7 +13,7 @@ const VARIABLES = {
  unsortedArray: [],
  sortedArray: undefined,
  mergeIndices: [],
- mergedArrays: [],
+ mergedArrays: []
 }
 
 // Array generator method to come up with x number of unsorted subarrays. Default max value of 10 for each subarray index
