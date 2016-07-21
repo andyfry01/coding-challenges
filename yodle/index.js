@@ -106,8 +106,8 @@ fs.readFile(txtFile, function(err, data){
           currentNode = secondNode
         }
       }
-      this.grandTotal = runningTotal
-      console.log("The maximum sum of the triangle is", this.grandTotal)
+      data.grandTotal = runningTotal
+      console.log("The maximum sum of the triangle is", data.grandTotal)
     }
   }
 
