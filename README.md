@@ -15,5 +15,23 @@ Some of these just fulfill the stipulations of the challenge and stop there, oth
 - **sort_anagram.js**: Write a method to sort an array of strings so that all the anagrams are next to each other. **(incomplete)**
 - **sort_and_merge_arrays.js**: Combine sets of nested arrays with overlapping values. For example: [[1,3],[4,6],[5,8],[13,17],[11,14]] becomes: [[1,3],[4,8],[11,17]] **(incomplete)**
 - **substrings.js**: Assume you have a method isSubstring which checks if one word is a substring of another. Given two strings, s1 and s2, write code to check if s2 is a rotation of s1 using only one call to isSubstring (i e , “waterbottle” is a rotation of “erbottlewat”)
+- **Yodle**:
+By starting at the top of the triangle and moving to adjacent numbers on the row below, the maximum total from top to bottom is 27.
+
+  ```
+  5
+
+  9  6
+
+  4  6  8
+
+  0  7  1  5
+
+  ```
+
+  I.e. 5 + 9 + 6 + 7 = 27.
+
+
+  Write a program to find the maximum total from top to bottom in triangle.txt, a text file containing a triangle with 100 rows.
 
 ![](gif.gif)
