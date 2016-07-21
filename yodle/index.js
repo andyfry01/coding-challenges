@@ -14,12 +14,13 @@ var txtFile = './triangle.txt'
 fs.readFile(txtFile, function(err, data){
   var triangleText = data.toString()
 
+  // Stores the max sum for the triangle and the triangle array built by triangleParser
+  var data = {
+    grandTotal: 0,
+    triangleArray: []
+  }
 
   var triangleParser = {
-
-    // Stores the max sum for the triangle
-    grandTotal: 0,
-    triangleArray: [],
 
     // Locates new lines to differentiate between triangle rows
     findNewLine: function (text) {
@@ -55,9 +56,10 @@ fs.readFile(txtFile, function(err, data){
 
       for (var i = 0; i < triangleLength; i++) {
         if (this.findNewLine(triangle[i])) {
-            this.triangleArray.push(rowArray)
+            data.triangleArray.push(rowArray)
             rowArray = []
             numIndex = 0
+            // There are two newline characters at the end of each row, hence i += 1
             i += 1
         }
         if (this.findNum(triangle[i])) {
@@ -71,20 +73,11 @@ fs.readFile(txtFile, function(err, data){
           }
         }
       }
-      triangleCalculator.doMath(this.triangleArray)
     }
   }
 
 
   var triangleCalculator = {
-
-    // Checks index of nodes in triangle row for doMath fxn
-    checkIndex: function(triangleNode) {
-      if (triangleNode - 1 === undefined) {
-        return true
-      }
-      return false
-    },
 
     // Performs calculation on triangle array to find max sum
     doMath: function(triangleArray) {
@@ -94,30 +87,31 @@ fs.readFile(txtFile, function(err, data){
       var startNum = triangleArray[0][0]
 
       var currentNode = startNum
-      var firstNum = undefined
-      var secondNum = undefined
+      var firstNode = undefined
+      var secondNode = undefined
 
       runningTotal += currentNode.number
 
       for (var i = 1; i < arrayLength; i++) {
 
-        console.log("the current node is", currentNode);
+        firstNode = triangleArray[i][currentNode.index]
+        secondNode = triangleArray[i][currentNode.index + 1]
 
-        firstNum = triangleArray[i][currentNode.index]
-        secondNum = triangleArray[i][currentNode.index + 1]
-
-        console.log("firstNum:", firstNum, "secondNum", secondNum);
-
-        if (firstNum.number > secondNum.number) {
-          runningTotal += firstNum.number
-          currentNode = firstNum
-        } else if (firstNum.number < secondNum.number) {
-          runningTotal += secondNum.number
-          currentNode = secondNum
+        // I'm assuming that there are no adjacent numbers in any row that are equal to each other.
+        if (firstNode.number > secondNode.number) {
+          runningTotal += firstNode.number
+          currentNode = firstNode
+        } else if (firstNode.number < secondNode.number) {
+          runningTotal += secondNode.number
+          currentNode = secondNode
         }
       }
-      console.log(runningTotal)
+      this.grandTotal = runningTotal
+      console.log("The maximum sum of the triangle is", this.grandTotal)
     }
   }
+
   triangleParser.buildTriangleArray(triangleText)
+  triangleCalculator.doMath(data.triangleArray)
+
 })
