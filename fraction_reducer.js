@@ -1,3 +1,10 @@
+// Having very weird problems with moduloize function. Tried saving the return of moduloize
+// as a variable (GCD, greatest common demonimator) and using that to divide the numbers
+// in the input array. Sometimes this worked, sometimes -- even though I could log the
+// divisor within the function successfully -- logging the variable that I was saving
+// that function return in was coming up as undefined, hence all the ridiculousness of pushing
+// the return into an array and then dividing the input numbers by that. 
+
 const TEST_INPUT = [
   [4, 8],
   [1536, 78360],
@@ -41,12 +48,12 @@ const FRACTION_REDUCER = {
       this.moduloize(dividend, divisor)
       let GCD = this.data.divisors[i]
       let reducedFraction = new Array(array[i][0] / GCD, array[i][1] / GCD)
-      console.log(reducedFraction);
       this.data.resultArray.push(reducedFraction)
 
     }
 
     TESTS.testFxnOutput(this.data.resultArray, EXPECTED_OUTPUT)
+
   },
 
   moduloize: function(dividend, divisor) {
