@@ -1,10 +1,3 @@
-// Having very weird problems with moduloize function. Tried saving the return of moduloize
-// as a variable (GCD, greatest common demonimator) and using that to divide the numbers
-// in the input array. Sometimes this worked, sometimes -- even though I could log the
-// divisor within the function successfully -- logging the variable that I was saving
-// that function return in was coming up as undefined, hence all the ridiculousness of pushing
-// the return into an array and then dividing the input numbers by that. 
-
 const TEST_INPUT = [
   [4, 8],
   [1536, 78360],
@@ -15,7 +8,7 @@ const TEST_INPUT = [
 ]
 
 const EXPECTED_OUTPUT = [
-  [1, 2]
+  [1, 2],
   [64, 3265],
   [25739, 2768],
   [7, 18],
@@ -26,55 +19,71 @@ const EXPECTED_OUTPUT = [
 const FRACTION_REDUCER = {
 
   data: {
-    resultArray: [],
-    divisors: []
+    resultArray: []
   },
 
   reduce: function(array) {
 
-    for (let i = 0; i < array.length; i++) {
+    for (let [numOne, numTwo] of array) {
 
       let divisor = undefined
       let dividend = undefined
 
-      if (array[i][0] > array[i][1]) {
-        dividend = array[i][0]
-        divisor = array[i][1]
+      if (numOne > numTwo) {
+        dividend = numOne
+        divisor = numTwo
       } else {
-        dividend = array[i][1]
-        divisor = array[i][0]
+        dividend = numTwo
+        divisor = numOne
       }
 
-      this.moduloize(dividend, divisor)
-      let GCD = this.data.divisors[i]
-      let reducedFraction = new Array(array[i][0] / GCD, array[i][1] / GCD)
+      // GCD = greatest common denominator
+      let GCD = this.findDenominator(dividend, divisor)
+      let reducedFraction = new Array(numOne / GCD, numTwo / GCD)
       this.data.resultArray.push(reducedFraction)
 
     }
 
     TESTS.testFxnOutput(this.data.resultArray, EXPECTED_OUTPUT)
-
   },
 
-  moduloize: function(dividend, divisor) {
+  findDenominator: function(dividend, divisor) {
     let quotient = Math.floor(dividend / divisor)
     let remainder = dividend % divisor
     if (remainder === 0) {
-      this.data.divisors.push(divisor)
+      return divisor
     } else {
       let newDividend = divisor
-      this.moduloize(newDividend, remainder)
+      return this.findDenominator(newDividend, remainder)
     }
   }
 }
 
 
 const TESTS = {
+
   testFxnOutput: function(fxnOutput, expectedOutput) {
-    if (fxnOutput !== expectedOutput) {
-      console.error("Error, function produced incorrect output.", fxnOutput, expectedOutput);
-    } else {
-      console.log("Success! Here are your reduced fractions:", fxnOutput)
+    let error = false
+    for (let [numOne, numTwo] of fxnOutput) {
+      if (fxnOutput.numOne !== expectedOutput.numOne) {
+        error = true
+      }
+      if (fxnOutput.numTwo !== expectedOutput.numTwo) {
+        error = true
+      }
     }
+
+    if (error) {
+      console.error("Error, function produced incorrect result.");
+      console.log("Output of function:");
+      console.table(fxnOutput);
+      console.log("Expected output of function:");
+      console.table(expectedOutput);
+    }
+    if (!error) {
+      console.log("Success! Fractions successfully reduced.");
+      console.log(FRACTION_REDUCER.data.resultArray);
+    }
+
   }
 }
