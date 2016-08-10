@@ -26,15 +26,17 @@ const hexConverter = {
 
   convertHex: function(hex) {
 
-    let hexLen = hex.length
     let hexMultiplier = hex.length - 1
     let hexConversion = 0
-    let loops = 0;
 
     for (val in hex) {
 
+      // First checks if the digit is an integer or a string.
+      // Need to parse the strigified integer before we can perform the calculations
       if (parseInt(hex[val])) {
+
         let num = parseInt(hex[val])
+
         if (hexMultiplier === 0) {
           hexConversion += num
         }
@@ -44,6 +46,8 @@ const hexConverter = {
         }
       }
 
+      // If the digit is a letter, we then compare it to the list of hex letter values
+      // in the hexLetterVals object and then do the calculations on that value
       if (!parseInt(hex[val])) {
 
         let letter = hex[val]
@@ -58,5 +62,8 @@ const hexConverter = {
         }
       }
     }
+    this.data.binary = hexConversion
+    console.log(`The hexadecimal number ${hex.join('')} in base 2 is ${this.data.binary}`);
   }
+
 }
