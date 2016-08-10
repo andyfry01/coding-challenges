@@ -22,7 +22,6 @@ const hexConverter = {
         this.data.hexArray.push(hex[val])
       }
     }
-    console.log(this.data);
   },
 
   convertHex: function(hex) {
@@ -34,35 +33,30 @@ const hexConverter = {
 
     for (val in hex) {
 
-      if (loops < hexLen) {
-        if (parseInt(hex[val])) {
-          let num = parseInt(hex[val])
-          if (hexMultiplier > 0) {
-            hexConversion += (num * Math.pow(16, hexMultiplier))
-
-            hexMultiplier -= 1
-          }
-          if (hexMultiplier === 0) {
-            hexConversion += num
-
-          }
-          loops += 1
+      if (parseInt(hex[val])) {
+        let num = parseInt(hex[val])
+        if (hexMultiplier === 0) {
+          hexConversion += num
         }
+        if (hexMultiplier > 0) {
+          hexConversion += (num * Math.pow(16, hexMultiplier))
+          hexMultiplier -= 1
+        }
+      }
 
-        if (!parseInt(hex[val])) {
-          if (hexMultiplier > 0) {
-            let letter = hex[val]
-            let num = this.hexLetterVals[letter]
-            hexConversion += (num * Math.pow(16, hexMultiplier))
-            hexMultiplier -= 1
-          }
-          if (hexMultiplier === 0) {
-            hexConversion += this.hexLetterVals.val
-          }
-          loops += 1
+      if (!parseInt(hex[val])) {
+
+        let letter = hex[val]
+        let num = this.hexLetterVals[letter]
+
+        if (hexMultiplier === 0) {
+          hexConversion += num
+        }
+        if (hexMultiplier > 0) {
+          hexConversion += (num * Math.pow(16, hexMultiplier))
+          hexMultiplier -= 1
         }
       }
     }
-    console.log(hexConversion);
   }
 }
