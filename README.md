@@ -9,6 +9,7 @@ Some of these just fulfill the stipulations of the challenge and stop there, oth
 - **change.js**: Given a certain amount of currency in dollars, make change in American coinage. Indicate the number of quarters, dimes, nickels and pennies returned.
 - **change_two.js**: Same challenge as in change.js, but refactored to be more robust and object-oriented.
 - **fraction_reducer.js**: A fraction exists of a numerator (top part) and a denominator (bottom part) as you probably all know. Simplifying (or reducing) fractions means to make the fraction as simple as possible. Meaning that the denominator is a close to 1 as possible. You will be given a list with 2 numbers separator by a space. The first is the numerator, the second the denominator. Reduce the fractions.
+- **hexadecimal_converter.js**: Write a function which converts hex number (given as a string) to decimal number. Account for both positive and negative hex values.
 - **merge_arrays.js**: You are given two sorted arrays, A and B, and A has a large enough buffer at the end to hold B. Write a method to merge B into A in sorted order.
 -  **number_palindrome.js**:  Figure out if a given number is a palindrome. You may not convert the number into a string. **(incomplete)**
 - **replace_spaces.js**: Write a method to replace all spaces in a string with ‘%20’
