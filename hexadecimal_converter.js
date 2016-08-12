@@ -1,94 +1,96 @@
-const hexConverter = {
+class Number {
+  constructor(hexNum) {
+    this.hexNum = hexNum
+    this.hexDigitArray = []
+    this.binary = undefined
+    this.isNegative = false
+  }
 
-  data: {
-    hexArray: [],
-    isNegative: false,
-    binary: undefined
-  },
+  static parse(number) {
+    let hexNum = number.hexNum
+    typeof(hexNum) !== "number" ? console.log("Error, you must pass in a hexadecimal value") : null
 
-  hexLetterVals: {
-    A: 10,
-    B: 11,
-    C: 12,
-    D: 13,
-    E: 14,
-    F: 15
-  },
-
-  parseHex: function(hex) {
-
-    typeof(hex) === "number" ? console.log("Error, you must pass in a hexadecimal value") : null
-    if (typeof(hex) === "string") {
-      this.data.hexArray = []
-      for (val in hex) {
-        if (hex[val] === '-') {
-          this.data.hexArray.push(hex[val])
-        } else if (!parseInt(hex[val])) {
-          this.data.hexArray.push(hex[val].toUpperCase())
-        } else if (parseInt(hex[val])) {
-          this.data.hexArray.push(hex[val])
+    if (typeof(hexNum) === "string") {
+      number.hexDigitArray = []
+      for (let digit in hexNum) {
+        if (hexNum[digit] === '-') {
+          number.hexDigitArray.push(hexNum[digit])
+        } else if (!parseInt(hexNum[digit])) {
+          number.hexDigitArray.push(hexNum[digit].toUpperCase())
+        } else if (parseInt(hexNum[digit])) {
+          number.hexDigitArray.push(hexNum[digit])
         }
       }
     }
-  },
+  }
 
-  convertHex: function(hex) {
+  static convert(number) {
 
+    let hexNum = number.hexDigitArray
     let hexMultiplier = undefined
+    let binaryConversion = 0
 
-    hex[0] === '-' ? hexMultiplier = hex.length - 2 : hexMultiplier = hex.length - 1
+    let hexLetterVals = {
+      A: 10,
+      B: 11,
+      C: 12,
+      D: 13,
+      E: 14,
+      F: 15
+    }
 
-    let hexConversion = 0
+    hexNum[0] === '-' ? hexMultiplier = hexNum.length - 2 : hexMultiplier = hexNum.length - 1
 
     // Reset data for new conversion
-    this.data.binary = undefined
-    this.data.isNegative = false
+    number.binary = undefined
+    number.isNegative = false
 
-    for (val in hex) {
+    for (let digit in hexNum) {
 
       // First checks if the digit is an integer or a string.
       // Need to parse the strigified integer before we can perform the conversion
-      if (parseInt(hex[val])) {
+      if (parseInt(hexNum[digit])) {
 
-        let num = parseInt(hex[val])
+        let num = parseInt(hexNum[digit])
 
         if (hexMultiplier === 0) {
-          hexConversion += num
+          binaryConversion += num
         }
         if (hexMultiplier > 0) {
-          hexConversion += (num * Math.pow(16, hexMultiplier))
+          binaryConversion += (num * Math.pow(16, hexMultiplier))
           hexMultiplier -= 1
         }
       }
 
       // If the digit is a letter, we then compare it to the list of hex letter values
       // in the hexLetterVals object and then do the conversion on that value
-      if (!parseInt(hex[val])) {
+      if (!parseInt(hexNum[digit])) {
 
-        let letter = hex[val]
+        let letter = hexNum[digit]
 
         // Checks to see if the input number is negative
         if (letter === '-') {
 
-          this.data.isNegative = true
+          number.isNegative = true
 
         // If it's not, perform conversion
         } else if (letter !== '-') {
 
-          let num = this.hexLetterVals[letter]
+          let num = hexLetterVals[letter]
           if (hexMultiplier === 0) {
-            hexConversion += num
+            binaryConversion += num
           }
           if (hexMultiplier > 0) {
-            hexConversion += (num * Math.pow(16, hexMultiplier))
+            binaryConversion += (num * Math.pow(16, hexMultiplier))
             hexMultiplier -= 1
           }
         }
 
       }
     }
-    this.data.isNegative === true ? this.data.binary = hexConversion * -1 : this.data.binary = hexConversion
-    console.log(`The hexadecimal number ${hex.join('')} in base 2 is ${this.data.binary}`);
+    number.isNegative === true ? number.binary = binaryConversion * -1 : number.binary = binaryConversion
+    console.log(`The hexadecimal number ${hexNum.join('')} in base 2 is ${number.binary}`);
+    
   }
 
 }
