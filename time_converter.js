@@ -7,9 +7,17 @@
 module.exports = class TimeConverter {
 
   constructor(num) {
+
+    this.undefinedErr = new ReferenceError('Num parameter is undefined')
+    this.wrongTypeErr = new ReferenceError('Num parameter must be a number')
+
     if (num === undefined) {
-      throw 'Num parameter is undefined'
+      throw this.undefinedErr
     }
+    if (typeof num !== "number") {
+      throw this.wrongTypeErr
+    }
+
     this.num = num
   }
 
