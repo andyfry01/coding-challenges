@@ -4,10 +4,12 @@
 // and return the number of hours and minutes the parameter
 // converts to (ie. if num = 63 then the output should be 1:3).
 // Separate the number of hours and minutes with a colon.
-
-class TimeConverter {
+module.exports = class TimeConverter {
 
   constructor(num) {
+    if (num === undefined) {
+      throw 'Num parameter is undefined'
+    }
     this.num = num
   }
 
@@ -38,7 +40,7 @@ class TimeConverter {
     } else {
       return 0
     }
-  }  
+  }
 
   convert() {
     return console.log(`${this.num} minutes converted into hours and minutes is ${this.findHours(this.num)}:${this.findMinutes(this.num)}`)
