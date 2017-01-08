@@ -1,3 +1,13 @@
-* {
-  background-color: lightblue;
+.charBox {
+  position: fixed;
+  height: 100px;
+  width: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  border: 1px dotted black;
+}
+
+.char {
+  margin: 0 auto;
 }
