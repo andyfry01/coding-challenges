@@ -26,16 +26,22 @@ module.exports = {
 
   transformedString: "",
   userInput: "",
+  matches: [],
 
   getInput: function(input){
     this.userInput = input
   },
   searchElements: function(userInput, elements){
-    elements.forEach((element)=>{
-      
+    this.matches = []
+    elements.forEach((element) => {
+      if (userInput.toLowerCase().includes(element.symbol.toLowerCase())) {
+        this.matches.push(element)
+      }
     })
   },
-  buildString: function(){},
+  buildString: function(matches){
+    
+  },
   returnString: function(){},
 
 }
