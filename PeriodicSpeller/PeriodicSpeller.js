@@ -30,7 +30,11 @@ module.exports = {
   getInput: function(input){
     this.userInput = input
   },
-  searchElements: function(){},
+  searchElements: function(userInput, elements){
+    elements.forEach((element)=>{
+      
+    })
+  },
   buildString: function(){},
   returnString: function(){},
 
