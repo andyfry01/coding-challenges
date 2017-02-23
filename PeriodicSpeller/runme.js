@@ -1,12 +1,16 @@
 const elements = require('./elements')
 const PeriodicSpeller = require('./PeriodicSpeller')
 
+let words = [
+  'genius',
+  'functions',
+  'bacon',
+  'poison',
+  'sickness',
+  'ticklish'
+]
 
-PeriodicSpeller.getInput('genius')
-PeriodicSpeller.searchElements(PeriodicSpeller.userInput, elements)
-
-// PeriodicSpeller.getInput('functions')
-// PeriodicSpeller.searchElements(PeriodicSpeller.userInput, elements)
-//
-PeriodicSpeller.getInput('sickness')
-PeriodicSpeller.searchElements(PeriodicSpeller.userInput, elements)
+words.forEach((word) => {
+  let wordWithElements = PeriodicSpeller.run(word)
+  console.log(wordWithElements)
+})

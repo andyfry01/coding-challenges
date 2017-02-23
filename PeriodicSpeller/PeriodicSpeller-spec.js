@@ -35,6 +35,7 @@ describe('#searchElements', () => {
     let actual = forEachSpy.callCount
     let expected = 1
     assert.equal(actual, expected)
+    forEachSpy.restore()
   })
   it('should check the element symbols against the user input', () => {
     let stringIncludesSpy = sinon.spy(String.prototype, 'includes')
@@ -44,10 +45,10 @@ describe('#searchElements', () => {
     let actual = stringIncludesSpy.callCount
     let expected = elements.length
     assert.equal(actual, expected)
+    stringIncludesSpy.restore()
   })
   it('should save the element in an array when a match is found', () => {
-    PeriodicSpeller.searchElements('Ge', elements)
-    let actual = PeriodicSpeller.matches
+    let actual = PeriodicSpeller.searchElements('Ge', elements)
     let expected = [{ number: 32, symbol: 'Ge', name: 'Germanium' }]
     assert.deepEqual(actual, expected)
    })
@@ -70,7 +71,6 @@ describe('sortMatches', () => {
         { number: 92, symbol: 'U', name: 'Uranium' }
       ]
       let inputString = "genius"
-      inputString = inputString.split('')
 
       let actual = PeriodicSpeller.sortMatches.byInputString(unsortedMatches, inputString)
       let expected = [
@@ -92,8 +92,18 @@ describe('#buildString', () => {
     let expected = 'function'
     assert.equal(actual, expected)
   })
-  it('should sort matches based on the input word', () => {
-
+  it('should return the input spelled with element symbols along with the element names', () => {
+    let sortedArray = [
+      { number: 22, symbol: 'Ti', name: 'Titanium' },
+      { number: 53, symbol: 'I', name: 'Iodine' },
+      { number: 6, symbol: 'C', name: 'Carbon' },
+      { number: 19, symbol: 'K', name: 'Potassium' },
+      { number: 3, symbol: 'Li', name: 'Lithium' },
+      { number: 16, symbol: 'S', name: 'Sulfur' },
+      { number: 1, symbol: 'H', name: 'Hydrogen' }
+    ]
+    let actual = PeriodicSpeller.buildString(sortedArray, 'ticklish')
+    let expected = 'TiCKLiSH (Titanium) (Carbon) (Potassium) (Lithium) (Sulfur) (Hydrogen) '
+    assert.equal(actual, expected)
   })
-
 })

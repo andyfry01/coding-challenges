@@ -45,6 +45,7 @@ module.exports = {
     // Sorts symbol matches by "order of appearance" in input string
     byInputString: function(matches, inputString){
       let matchesArray = []
+      inputString = inputString.split('')
 
       inputString.forEach(function(letter) {
         matches = matches.filter(function(element) {
@@ -62,15 +63,55 @@ module.exports = {
 
     }
   },
-  buildString: function(matches, inputString){
+  buildString: function(sortedMatches, inputString){
+    inputString = inputString.split('')
+    let compositeString = {
+      word: [],
+      elements: []
+    }
 
+    // 1) loop through each letter of input string
+    for (var i = 0; i < inputString.length; i++) {
+      // 2) compare inputString[i] against sortedMatches[j]
+      for (let j = 0; j < sortedMatches.length; j++) {
+        // 3) if the first letter of the symbol matches the inputString[i]
+        if (sortedMatches[j].symbol[0].toLowerCase() === inputString[i]) {
+            // 3b) if there is a second letter in the symbol
+            if (sortedMatches[j].symbol[1]) {
+              // 3c) if that second letter matches the next letter in the word
+              if (sortedMatches[j].symbol[1] === inputString[i + 1]) {
+                compositeString.word.push(sortedMatches[j].symbol)
+                compositeString.elements.push(`(${sortedMatches[j].name}) `)
+                // 3d) check if we're at the end of the word
+                if (i + 2 >= inputString.length) {
+                  i += 1
+                  j = 0
+                  // 3e) if we aren't jump two indices
+                } else {
+                  i += 2
+                  j = 0
+                }
+              }
+              // 3f) there is no second letter in the symbol, move on to the next letter of the inputString
+            } else {
+            compositeString.word.push(sortedMatches[j].symbol)
+            compositeString.elements.push(`(${sortedMatches[j].name}) `)
+            i += 1
+            j = 0
+          }
+        }
+      }
+    }
+    compositeString.word = compositeString.word.join('')
+    compositeString.elements = compositeString.elements.join('')
+    return `${compositeString.word} ${compositeString.elements}`
   },
-  returnString: function(){},
   run: function(input){
     this.getInput(input)
     this.matches = this.searchElements(this.userInput, elements)
-    this.sortedMatches = this.sortMatches.byInputString(this.matches, this.userInput.split(''))
-
+    this.sortedMatches = this.sortMatches.byInputString(this.matches, this.userInput)
+    this.transformedString = this.buildString(this.sortedMatches, this.userInput)
+    return this.transformedString
   }
 
 }
