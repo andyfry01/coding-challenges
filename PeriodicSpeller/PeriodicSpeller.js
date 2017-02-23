@@ -38,23 +38,22 @@ module.exports = {
         this.matches.push(element)
       }
     })
-    console.log(this.matches)
     this.buildString(this.matches, this.userInput)
   },
   sortMatches: {
     // Sorts symbol matches by "order of appearance" in input string
     byInputString: function(matches, inputString){
-      let matchesArray = undefined
+      let matchesArray = []
 
-      inputString.forEach((letter) => {
-        matchesArray = matches.sort((a, letter) => {
-          if (a.symbol < letter) {
-            return -1
-          };
-          if (a.symbol > letter) {
-            return 1
-          };
-          return 0;
+      inputString.forEach(function(letter) {
+        let found = false
+        matches = matches.filter(function(element) {
+          if(!found && element.symbol[0].toLowerCase() === letter.toLowerCase()) {
+              matchesArray.push(element)
+              found = true
+              return false
+          } else
+            return true
         })
       })
       return matchesArray
