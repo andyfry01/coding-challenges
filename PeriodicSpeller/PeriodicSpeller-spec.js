@@ -46,21 +46,54 @@ describe('#searchElements', () => {
     assert.equal(actual, expected)
   })
   it('should save the element in an array when a match is found', () => {
-    PeriodicSpeller.searchElements('MgHeLiSi', elements)
+    PeriodicSpeller.searchElements('Ge', elements)
     let actual = PeriodicSpeller.matches
     let expected = [{ number: 32, symbol: 'Ge', name: 'Germanium' }]
     assert.deepEqual(actual, expected)
    })
 })
 
-// describe('#buildString', () => {
-//   it('should exist', () => {
-//     let actual = typeof PeriodicSpeller.buildString
-//     let expected = 'function'
-//     assert.equal(actual, expected)
-//   })
-//   it('should sort matches based on the input word', () => {
-//
-//   })
+describe('sortMatches', () => {
+  describe('#byInputString', () => {
+    it('should exist', () => {
+      let actual = typeof PeriodicSpeller.sortMatches.byInputString
+      let expected = 'function'
+      assert.equal(actual, expected)
+    })
+    it('should return an array sorted according to the input string', () => {
+      let unsortedMatches = [
+        { number: 7, symbol: 'N', name: 'Nitrogen' },
+        { number: 16, symbol: 'S', name: 'Sulfur' },
+        { number: 28, symbol: 'Ni', name: 'Nickel' },
+        { number: 32, symbol: 'Ge', name: 'Germanium' },
+        { number: 53, symbol: 'I', name: 'Iodine' },
+        { number: 92, symbol: 'U', name: 'Uranium' }
+      ]
+      let inputString = "genius"
+      inputString = inputString.split('')
 
-// })
+      let actual = PeriodicSpeller.sortMatches.byInputString(unsortedMatches, inputString)
+      let expected = [
+        { number: 32, symbol: 'Ge', name: 'Germanium' },
+        { number: 7, symbol: 'N', name: 'Nitrogen' },
+        { number: 28, symbol: 'Ni', name: 'Nickel' },
+        { number: 53, symbol: 'I', name: 'Iodine' },
+        { number: 92, symbol: 'U', name: 'Uranium' },
+        { number: 16, symbol: 'S', name: 'Sulfur' }
+      ]
+      assert.deepEqual(actual, expected)
+    })
+  })
+})
+
+describe('#buildString', () => {
+  it('should exist', () => {
+    let actual = typeof PeriodicSpeller.buildString
+    let expected = 'function'
+    assert.equal(actual, expected)
+  })
+  it('should sort matches based on the input word', () => {
+
+  })
+
+})

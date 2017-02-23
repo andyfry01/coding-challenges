@@ -27,18 +27,19 @@ module.exports = {
   transformedString: "",
   userInput: "",
   matches: [],
+  sortedMatches: [],
 
   getInput: function(input){
     this.userInput = input
   },
   searchElements: function(userInput, elements){
-    this.matches = []
+    let matches = []
     elements.forEach((element) => {
       if (userInput.toLowerCase().includes(element.symbol.toLowerCase())) {
-        this.matches.push(element)
+        matches.push(element)
       }
     })
-    this.buildString(this.matches, this.userInput)
+    return matches
   },
   sortMatches: {
     // Sorts symbol matches by "order of appearance" in input string
@@ -46,11 +47,9 @@ module.exports = {
       let matchesArray = []
 
       inputString.forEach(function(letter) {
-        let found = false
         matches = matches.filter(function(element) {
-          if(!found && element.symbol[0].toLowerCase() === letter.toLowerCase()) {
+          if(element.symbol[0].toLowerCase() === letter.toLowerCase()) {
               matchesArray.push(element)
-              found = true
               return false
           } else
             return true
@@ -61,15 +60,17 @@ module.exports = {
     // Sorts matches array alphabetically, e.g. [N, Ne, Na]-> [N, Na, Ne]
     alphabetically: function(){
 
-    },
+    }
   },
   buildString: function(matches, inputString){
-    let sortedMatches = undefined
-    inputString = inputString.split('')
-    sortedMatches = this.sortMatches.byInputString(matches, inputString)
 
-    console.log(sortedMatches)
   },
   returnString: function(){},
+  run: function(input){
+    this.getInput(input)
+    this.matches = this.searchElements(this.userInput, elements)
+    this.sortedMatches = this.sortMatches.byInputString(this.matches, this.userInput.split(''))
+
+  }
 
 }
