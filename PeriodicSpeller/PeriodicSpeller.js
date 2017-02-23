@@ -38,9 +38,38 @@ module.exports = {
         this.matches.push(element)
       }
     })
+    console.log(this.matches)
+    this.buildString(this.matches, this.userInput)
   },
-  buildString: function(matches){
-    
+  sortMatches: {
+    // Sorts symbol matches by "order of appearance" in input string
+    byInputString: function(matches, inputString){
+      let matchesArray = undefined
+
+      inputString.forEach((letter) => {
+        matchesArray = matches.sort((a, letter) => {
+          if (a.symbol < letter) {
+            return -1
+          };
+          if (a.symbol > letter) {
+            return 1
+          };
+          return 0;
+        })
+      })
+      return matchesArray
+    },
+    // Sorts matches array alphabetically, e.g. [N, Ne, Na]-> [N, Na, Ne]
+    alphabetically: function(){
+
+    },
+  },
+  buildString: function(matches, inputString){
+    let sortedMatches = undefined
+    inputString = inputString.split('')
+    sortedMatches = this.sortMatches.byInputString(matches, inputString)
+
+    console.log(sortedMatches)
   },
   returnString: function(){},
 

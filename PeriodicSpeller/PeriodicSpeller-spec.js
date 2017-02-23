@@ -46,19 +46,21 @@ describe('#searchElements', () => {
     assert.equal(actual, expected)
   })
   it('should save the element in an array when a match is found', () => {
-    PeriodicSpeller.searchElements('ge', elements)
+    PeriodicSpeller.searchElements('MgHeLiSi', elements)
     let actual = PeriodicSpeller.matches
     let expected = [{ number: 32, symbol: 'Ge', name: 'Germanium' }]
     assert.deepEqual(actual, expected)
    })
 })
 
-describe('#buildString', () => {
-  it('should exist', () => {
-    let actual = typeof PeriodicSpeller.buildString
-    let expected = 'function'
-    assert.equal(actual, expected)
-  })
-  it('should sort matches based on the input word')
+// describe('#buildString', () => {
+//   it('should exist', () => {
+//     let actual = typeof PeriodicSpeller.buildString
+//     let expected = 'function'
+//     assert.equal(actual, expected)
+//   })
+//   it('should sort matches based on the input word', () => {
+//
+//   })
 
-})
+// })
