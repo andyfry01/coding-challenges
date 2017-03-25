@@ -32,6 +32,12 @@ module.exports = {
   getInput: function(input){
     this.userInput = input
   },
+  checkString: function(input, transformedString) {
+    if (input.toLowerCase() === transformedString.toLowerCase()) {
+      return true
+    }
+    return false
+  },
   searchElements: function(userInput, elements){
     let matches = []
     elements.forEach((element) => {
@@ -102,9 +108,12 @@ module.exports = {
         }
       }
     }
-    compositeString.word = compositeString.word.join('')
-    compositeString.elements = compositeString.elements.join('')
-    return `${compositeString.word} ${compositeString.elements}`
+    if (this.checkString(inputString.join(''), compositeString.word.join(''))) {
+      compositeString.word = compositeString.word.join('')
+      compositeString.elements = compositeString.elements.join('')
+      return `${compositeString.word} ${compositeString.elements}`
+    }
+    return false
   },
   run: function(input){
     this.getInput(input)

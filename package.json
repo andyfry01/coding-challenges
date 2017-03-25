@@ -4,8 +4,8 @@
   "description": "## Some daily coding challenges to practice new skills/keep sharp Some of these just fulfill the stipulations of the challenge and stop there, others I've expanded into mini-projects with functions for generating input data, testing, etc.",
   "main": "binary_swap.js",
   "scripts": {
-    "test": "node_modules/.bin/mocha --reporter nyan",
-    "test-nyan": "node_modules/.bin/mocha --reporter nyan"
+    "test": "mocha --reporter nyan",
+    "test-nyan": "mocha --reporter nyan"
   },
   "repository": {
     "type": "git",
@@ -21,6 +21,8 @@
     "babel-core": "^6.21.0",
     "babel-preset-es2015": "^6.18.0",
     "chai": "^3.5.0",
-    "sinon": "^1.17.7"
-  }
+    "sinon": "^1.17.7",
+    "syllable": "^2.0.0"
+  },
+  "devDependencies": {}
 }

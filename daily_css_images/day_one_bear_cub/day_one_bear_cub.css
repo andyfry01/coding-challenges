@@ -1,0 +1,50 @@
+.container {
+  height: 600px;
+  width: 600px;
+  position: relative;
+}
+
+.bearHead {
+  position: relative;
+  height: 200px;
+  width: 200px;
+  left: 200px;
+  top: 10px;
+}
+.bearFace {
+  position: absolute;
+  height: inherit;
+  width: inherit;
+  z-index: 2;
+  background-color: lightblue;
+  border-radius: 100px;
+  border-style: solid transparent;
+}
+.ears {
+  position: absolute;
+  height: 75px;
+  width: 200px;
+  left: 0;
+  right: 0;
+  background: black;
+  z-index: 1;
+}
+/*.outerEar {
+  height: 50px;
+  width: 25px;
+  border-radius: 25px / 13.5px;
+}*/
+.eyes {
+}
+.mouth {
+}
+
+.bearBody {
+  position: absolute;
+  height: 200px;
+  width: 200px;
+  background-color: lightgreen;
+  left: 200px;
+  top: 210px;
+  border-radius: 100px;
+}
