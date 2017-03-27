@@ -1,0 +1,62 @@
+:root {
+
+}
+.container {
+  position: relative;
+  height: 500px;
+  width: 500px;
+  background: lightblue;
+  margin-left: 500px;
+  margin-top: 50px;
+}
+.head {
+  position: relative;
+  height: 400px;
+  width: 400px;
+  background: lightgreen;
+}
+.ears {
+  position: absolute;
+  height: 200px;
+  width: 400px;
+  background: lightyellow;
+}
+.right {
+  position: absolute;
+  right: 0;
+}
+.left {
+  position: absolute;
+  left: 0;
+  transform: scaleX(-1);
+}
+
+.ear {
+  position: absolute;
+  height: 150px;
+  width: 150px;
+}
+.innerEar {
+  position: absolute;
+  height: 60px;
+  width: 60px;
+  border-radius: 30px 15px;
+  background: lightpink;
+  transform: rotate(-45deg);
+  top: 50px;
+}
+.upper {
+  /*background: black;*/
+}
+.lower {
+  transform: rotate(90deg);
+  bottom: 0;
+  /*background: blue;*/
+}
+.lobe {
+  position: absolute;
+  height: 100px;
+  width: 100px;
+  border-radius: 75px 25px;
+  background: gray;
+}
