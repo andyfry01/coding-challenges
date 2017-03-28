@@ -84,19 +84,19 @@
 }
 
 .left > .lobe {
-  transform: rotate(60deg);
-  left: 185px;
+  transform: rotate(154deg);
+  left: 140px;
 }
 .right > .lobe {
-  transform: rotate(-60deg);
-  left: 272px;
+  transform: rotate(25deg);
+  left: 240px;
 }
 
 .lobe {
   position: absolute;
-  height: 200px;
-  width: 125px;
-  border-radius: 65px / 100px;
+  width: 200px;
+  height: 125px;
+  border-radius: 100px/65px;
   background: lightblue;
   z-index: 6;
   top: 110px;
@@ -113,21 +113,23 @@
   z-index: 7;
 }
 
-/*.left  .whiskers {
-  transform: rotate(90deg);
+.left  .whiskers {
+  top: 40px;
 }
 .right  .whiskers {
-  transform: rotate(-90deg);
-}*/
+  top: 25px;
+}
 .whiskers {
   position: relative;
   height: 200px;
   width: 400px;
-  background: white;
 }
 
 .whisker {
-  height: 100px;
-  width: 10px;
+  position: relative;
+  width: 100px;
+  height: 10px;
+  margin-bottom: 15px;
   background: black;
+  left: 180px;
 }
