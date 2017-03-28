@@ -9,13 +9,13 @@
   position: relative;
   height: 600px;
   width: 600px;
+  background: rgb(148, 168, 195	);
 }
 
 .beaver {
   position: relative;
   height: 100%;
   width: 100%;
-  background: lightblue;
 }
 
 .skull {
@@ -23,7 +23,7 @@
   height: var(--headHeight);
   width: var(--headWidth);
   border-radius: calc(var(--headWidth) / 2) / calc(var(--headHeight) / 2);
-  background: brown;
+  background: rgb(150, 95, 64);
   right: 50px;
   z-index: 0
 }
@@ -45,7 +45,7 @@
   width: 100px;
   background: white;
   margin-top: 25px;
-  border: 3px solid black;
+  border: 5px solid black;
   border-radius: 50px;
   z-index: 3
 }
@@ -72,12 +72,44 @@
   z-index: 5;
 }
 
+.ears {
+  position: absolute;
+  height: 150px;
+  width: 100%;
+}
+.left > .ear {
+  transform: rotate(45deg);
+  left: 70px;
+}
+.right > .ear {
+  transform: rotate(-45deg);
+  left: 400px;
+}
+.ear {
+  position: absolute;
+  height: 90px;
+  width: 125px;
+  border-radius: 60px / 45px;
+  background: rgb(94, 39, 0);
+  top: 15px;
+}
+.innerEar {
+  position: relative;
+  height: 70px;
+  width: 105px;
+  border-radius: 50px / 35px;
+  background: black;
+  margin: 0 auto;
+  top: 9px;
+
+}
+
 .lowerHead {
   position: absolute;
   height: var(--snoutHeight);
   width: var(--snoutWidth);
   border-radius: calc(var(--snoutWidth) / 2) / calc(var(--snoutHeight) / 2);
-  background: brown;
+  background: rgb(150, 95, 64);
   top: 100px;
   left: -50px;
   z-index: 1;
@@ -97,9 +129,9 @@
   width: 200px;
   height: 125px;
   border-radius: 100px/65px;
-  background: lightblue;
+  background: rgb(233, 233, 233);
   z-index: 6;
-  top: 110px;
+  top: 125px;
 }
 
 .nose {
@@ -109,7 +141,7 @@
   background: black;
   border-radius: 37px;
   left: 250px;
-  top: 150px;
+  top: 130px;
   z-index: 7;
 }
 
@@ -132,4 +164,32 @@
   margin-bottom: 15px;
   background: black;
   left: 180px;
+}
+
+.mouth {
+  position: relative;
+  height: 100px;
+  width: 200px;
+  border-radius: 100px/50px;
+  background: black;
+  left: 190px;
+  top: 200px;
+}
+
+.teeth {
+  position: absolute;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  height: 100px;
+  width: 150px;
+  left: 217px;
+  top: 200px;
+  z-index: 5;
+}
+.tooth {
+  position: relative;
+  height: 100px;
+  width: 50px;
+  background: white;
 }
