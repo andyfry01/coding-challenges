@@ -1,0 +1,42 @@
+:root {
+  --tigerHeight: 600px;
+  --tigerWidth: 600px;
+
+  /* Height fractions */
+  --quarterHeight: calc(var(--tigerHeight) * 0.25);
+  --thirdHeight: calc(var(--tigerHeight) * 0.33);
+  --halfHeight: calc(var(--tigerHeight) * 0.5);
+  --twoThirdsHeight: calc(var(--tigerHeight) * 0.66);
+  --threeQuartersHeight: calc(var(--tigerHeight) * 0.75);
+
+  /* Width fractions */
+  --quarterWidth: calc(var(--tigerWidth) * 0.25);
+  --thirdWidth: calc(var(--tigerWidth) * 0.33);
+  --halfWidth: calc(var(--tigerWidth) * 0.5);
+  --twoThirdsHeight: calc(var(--tigerWidth) * 0.66);
+  --threeQuartersWidth: calc(var(--tigerWidth) * 0.75);
+}
+
+.container {
+  position: relative;
+  height: 600px;
+  width: 600px;
+  background: lightyellow;
+}
+
+.tiger {
+  position: relative;
+  height: var(--tigerHeight);
+  width: var(--tigerWidth);
+  background: lightblue;
+}
+
+.head {
+  position: relative;
+  height: var(--halfHeight);
+  width: var(--threeQuartersWidth);
+  border-radius: 300px / 200px;
+  background: blue;
+  margin: 0 auto;
+  top: 100px;
+}
