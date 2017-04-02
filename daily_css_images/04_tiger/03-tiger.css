@@ -43,7 +43,9 @@
   position: absolute;
   height: var(--quarterHeight);
   width: 400px;
-  left: 25px;
+  right: 0;
+  left: 0;
+  margin: auto;
   background: yellow;
   z-index: 0;
 }
@@ -67,6 +69,7 @@
 .right {
   right: 0;
 }
+
 .ear {
   position: relative;
   height: 100px;
@@ -90,4 +93,38 @@
   background: black;
   margin: 0 auto;
   top: 15px;
+}
+
+.eyes {
+  position: relative;
+  height: 30%;
+  width: 60%;
+  top: 25%;
+  margin: 0 auto;
+}
+
+.eye {
+  height: 55px;
+  width: 75px;
+  border-radius: 37px / 32px;
+  background: white;
+  border: 2px solid black;
+}
+
+.pupil {
+  position: relative;
+  height: 25px;
+  width: 25px;
+  background: black;
+  top: 20px;
+  left: 50px;
+  border-radius: 12.5px;
+}
+
+.lightReflection {
+  position: relative;
+  height: 12px;
+  width: 12px;
+  border-radius: 6px;
+  background: white;
 }
