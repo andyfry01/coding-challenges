@@ -96,11 +96,14 @@
 }
 
 .eyes {
-  position: relative;
+  position: absolute;
   height: 30%;
   width: 60%;
   top: 25%;
-  margin: 0 auto;
+  left: 0;
+  right: 0;
+  margin: auto;
+  z-index: 3;
 }
 
 .eye {
@@ -127,4 +130,47 @@
   width: 12px;
   border-radius: 6px;
   background: white;
+}
+
+.snout {
+  position: absolute;
+  height: 150px;
+  width: 300px;
+  border-radius: 150px / 75px;
+  background: white;
+  left: 0;
+  right: 0;
+  top: 125px;
+  margin: auto;
+  z-index: 2;
+}
+
+.nose {
+  position: absolute;
+  height: 50px;
+  width: 75px;
+  border-radius: 37px / 25px;
+  background: lightblue;
+  left: 0;
+  right: 0;
+  margin: auto;
+  top: 20px;
+  overflow: hidden;
+  z-index: 3;
+}
+
+.bottomNose {
+  position: relative;
+  height: 30px;
+  width: 100%;
+  top: 20px;
+  background: green;
+}
+
+.nostril {
+  position: relative;
+  height: 30px;
+  width: 30px;
+  border-radius: 15px;
+  background: black;
 }
