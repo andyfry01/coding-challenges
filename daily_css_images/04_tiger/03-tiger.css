@@ -35,8 +35,59 @@
   position: relative;
   height: var(--halfHeight);
   width: var(--threeQuartersWidth);
-  border-radius: 300px / 200px;
-  background: blue;
   margin: 0 auto;
   top: 100px;
+}
+
+.ears {
+  position: absolute;
+  height: var(--quarterHeight);
+  width: 400px;
+  left: 25px;
+  background: yellow;
+  z-index: 0;
+}
+
+.face {
+  position: absolute;
+  height: var(--halfHeight);
+  width: var(--threeQuartersWidth);
+  border-radius: 300px / 200px;
+  background: green;
+  top: 25px;
+  z-index: 2;
+}
+
+.left, .right {
+  position: absolute;
+}
+.left {
+  left: 0;
+}
+.right {
+  right: 0;
+}
+.ear {
+  position: relative;
+  height: 100px;
+  width: 100px;
+  background: lightgreen;
+}
+
+.outerEar {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  border-radius: 50px;
+  background: white;
+}
+
+.innerEar {
+  position: relative;
+  height: 75px;
+  width: 75px;
+  border-radius: 37px;
+  background: black;
+  margin: 0 auto;
+  top: 15px;
 }
