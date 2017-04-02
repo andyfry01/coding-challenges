@@ -174,3 +174,48 @@
   border-radius: 15px;
   background: black;
 }
+
+.whiskers {
+  position: relative;
+  height: 150px;
+  width: 100%;
+  top: 30px;
+  border: 1px dotted purple;
+}
+
+.right > .whiskerGroup {
+  transform: rotate(30deg);
+}
+.left > .whiskerGroup {
+  transform: rotate(-30deg);
+}
+.whiskerGroup {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100px;
+  width: 100px;
+  background: purple;
+}
+
+.right .whisker {
+  left: 30px;
+}
+.left .whisker {
+  right: 30px;
+}
+.whisker {
+  position: absolute;
+  height: 5px;
+  width: 150px;
+  background: black;
+}
+.one {
+  top: 20px;
+}
+.two {
+  top: 40px;
+}
+.three {
+  top: 60px;
+}
