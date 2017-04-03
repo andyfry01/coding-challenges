@@ -21,14 +21,13 @@
   position: relative;
   height: 600px;
   width: 600px;
-  background: lightyellow;
 }
 
 .tiger {
   position: relative;
   height: var(--tigerHeight);
   width: var(--tigerWidth);
-  background: lightblue;
+  background: rgb(119, 225, 93);
 }
 
 .head {
@@ -46,7 +45,6 @@
   right: 0;
   left: 0;
   margin: auto;
-  background: yellow;
   z-index: 0;
 }
 
@@ -55,7 +53,7 @@
   height: var(--halfHeight);
   width: var(--threeQuartersWidth);
   border-radius: 300px / 200px;
-  background: green;
+  background: rgb(244, 145, 33);
   top: 25px;
   z-index: 2;
 }
@@ -81,7 +79,7 @@
   height: 100%;
   width: 100%;
   border-radius: 50px;
-  background: white;
+  background: rgb(244, 145, 33);
 }
 
 .innerEar {
@@ -92,6 +90,49 @@
   background: black;
   margin: 0 auto;
   top: 15px;
+}
+
+.cheekStripes {
+  position: absolute;
+  height: 150px;
+  width: 100%;
+  top: 100px;
+}
+.cheekStripes > .left {
+  transform: rotate(30deg);
+  height: 100px;
+  width: 200px;
+  top: 25px;
+
+}
+.cheekStripes > .right {
+  transform: rotate(-30deg);
+  height: 100px;
+  width: 200px;
+  top: 25px;
+
+}
+.stripe {
+  position: absolute;;
+  height: 25px;
+  width: 100px;
+  background: black;
+  z-index: 3;
+}
+.right > .stripe {
+  right: 15px;
+}
+.left > .stripe {
+  left: 15px;
+}
+.stripe:nth-child(1) {
+  top: 10px;
+}
+.stripe:nth-child(2) {
+  top: 43px;
+}
+.stripe:nth-child(3) {
+  top: 75px;
 }
 
 .eyes {
@@ -149,7 +190,7 @@
   height: 50px;
   width: 75px;
   border-radius: 37px / 25px;
-  background: lightblue;
+  background: rgb(255, 165, 12);
   left: 0;
   right: 0;
   margin: auto;
@@ -163,7 +204,7 @@
   height: 30px;
   width: 100%;
   top: 20px;
-  background: green;
+  background: brown;
 }
 
 .nostril {
@@ -204,7 +245,7 @@
 .whisker {
   position: absolute;
   height: 5px;
-  width: 150px;
+  width: 100px;
   background: black;
 }
 .one {
@@ -287,7 +328,6 @@
 .fuzzGroup {
   height: 100px;
   width: 40px;
-  background: blue;
   z-index: 2;
 }
 .fuzz {
