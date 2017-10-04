@@ -13,7 +13,7 @@ const packetIndexExpression = /(?:^\d{4}\s+)(\d+)(?:\s+)/
 const packetLengthExpression = /(?:^\d{4}\s+\d+\s+)(\d+)(\s{0,})/
 const packetDataExpression = /(?:^\d{4}\s+\d+\s+\d+)(.{0,})/
 
-let packetDataObject = {}
+let packetTracker = {}
 let deliveredPackets = []
 
 let lineDivider = ''
@@ -35,51 +35,52 @@ function sendData(data){
 }
 
 function updatePacket(packetData){
-  let updatedPacket = undefined
+  let packetToUpdate = undefined
   // build data object by parsing packet for relevant parts
-  let dataObj = {
+  let incomingPacketData = {
     messageID: packetData.match(messageIDExpression)[0],
     packetIndex: parseInt(packetData.match(packetIndexExpression)[1], 10),
     packetLength: parseInt(packetData.match(packetLengthExpression)[1], 10),
     packetData: packetData.match(packetDataExpression)[1]
   }
 
-  let packetDataUpdate = Object.assign({}, packetDataObject)
-  // If we haven't seen the messageID in the packet stream already, create a new entry to track it in the packetDataObject, with an empty array matching the indicated length of the incoming data
-  if (packetDataUpdate[dataObj.messageID] === undefined) {
-    let emptyArray = Array(dataObj.packetLength).fill(0)
-    packetDataUpdate = Object.assign({}, packetDataUpdate, {[dataObj.messageID]: emptyArray})
-    updatedPacket = packetDataUpdate[dataObj.messageID]
+  let packetTrackerUpdate = Object.assign({}, packetTracker)
+  // If we haven't seen the messageID in the packet stream already, create a new entry to track it in the packetTracker, with an empty array matching the indicated length of the incoming data
+  if (packetTrackerUpdate[incomingPacketData.messageID] === undefined) {
+    let emptyPacketDataArray = Array(incomingPacketData.packetLength).fill(0)
+    packetTrackerUpdate = Object.assign({}, packetTrackerUpdate, {[incomingPacketData.messageID]: emptyPacketDataArray})
+    packetToUpdate = packetTrackerUpdate[incomingPacketData.messageID]
   }
-  // map through the packetDataUpdate array and add the incoming packet at the correct index in the array
-  updatedPacket = packetDataUpdate[dataObj.messageID].map((item, index) => {
-    if (dataObj.packetIndex === index) {
-      return dataObj
+  // map through the packetTrackerUpdate array and add the incoming packet at the correct index in the array
+  packetToUpdate = packetTrackerUpdate[incomingPacketData.messageID].map((item, index) => {
+    if (incomingPacketData.packetIndex === index) {
+      return incomingPacketData
     } else {
       return item
     }
   })
-  let packetObject = {}
-  packetObject.messageID = dataObj.messageID
-  packetObject.packetArray = updatedPacket
+  let packetObject = {
+    messageID: incomingPacketData.messageID,
+    packetArray: packetToUpdate
+  }
   return packetObject
 }
 
-function testForCompletePacket(packetData) {
+function thisPacketIsComplete(packetData) {
   // test if any index in the assembled packet hasn't been filled in with the corresponding line from the packet. If there are gaps, we haven't received the whole packet yet.
-	let result = undefined
+	let completionStatus = undefined
 	packetData.forEach((item, index) => {
     if (item === 0) {
-      result = false
+      completionStatus = false
     }
-    if (index === packetData.length - 1 && result === undefined) {
-      result = true
+    if (index === packetData.length - 1 && completionStatus === undefined) {
+      completionStatus = true
     }
 	})
-	return result
+	return completionStatus
 }
 
-function checkDeliveryStatus(messageID) {
+function thisPacketHasBeenDelieveredAlready(messageID) {
   // Check to see if this particular packet has been delievered already. If it has been delievered, do not print it (seeing as we already have), if it has not been delivered, add messageID to array for tracking.
   if (deliveredPackets.indexOf(messageID) > -1) {
     return true
@@ -91,7 +92,7 @@ function checkDeliveryStatus(messageID) {
 
 function printAssembledPacket(packetData) {
   // check for delivery status, assemble and print package
-  if (checkDeliveryStatus(packetData.messageID) === true) {
+  if (thisPacketHasBeenDelieveredAlready(packetData.messageID)) {
     return
   } else {
     let output = ''
@@ -121,8 +122,8 @@ testFiles.forEach((file) => {
     let randNumMiliseconds = (Math.random() * 5 + 1) * 1000
     setTimeout(() => {
       sendData(line).then(updatedPacketData => {
-        packetDataObject[updatedPacketData.messageID] = updatedPacketData.packetArray
-        if (testForCompletePacket(updatedPacketData.packetArray) === true) {
+        packetTracker[updatedPacketData.messageID] = updatedPacketData.packetArray
+        if (thisPacketIsComplete(updatedPacketData.packetArray) === true) {
           printAssembledPacket(updatedPacketData)
         }
       })
