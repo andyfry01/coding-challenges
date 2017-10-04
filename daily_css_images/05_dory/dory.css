@@ -1,0 +1,33 @@
+.container {
+  position: relative;
+  height: 600px;
+  width: 800px;
+  background: blue;
+}
+
+.dory {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  background: lightblue;
+}
+
+.faceArea {
+  position: absolute;
+  height: 100%;
+  width: 300px;
+  right: 0;
+  background: lightgreen;
+  border-radius: 150px / 50%;
+  z-index: 2;
+}
+
+.bodyArea {
+  position: absolute;
+  border-top: 290px solid transparent;
+  border-bottom: 290px solid transparent;
+  border-right: 500px solid lightyellow;
+  z-index: 1;
+  right: 175px;
+  top: 5px;
+}
